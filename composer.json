@@ -1,0 +1,16 @@
+{
+    "name": "aktuba/php-puppeteer",
+    "description": "Extend puphpeteer",
+    "type": "library",
+    "require": {
+        "nesk/puphpeteer": "^2.0",
+        "ext-mbstring": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

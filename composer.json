@@ -2,7 +2,9 @@
     "name": "aktuba/php-puppeteer",
     "description": "Extend puphpeteer",
     "type": "library",
+    "license": "MIT",
     "require": {
+        "php": ">=7.1",
         "nesk/puphpeteer": "^2.0",
         "ext-mbstring": "*",
         "ext-json": "*"
@@ -11,6 +13,5 @@
         "psr-4": {
             "": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

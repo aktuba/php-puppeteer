@@ -55,7 +55,7 @@ composer require aktuba/php-puphpeteer@dev-master
 npm install @nesk/puphpeteer
 ```
 
-## Notable differences between PuPHPeteer and Puppeteer
+## Notable differences between PhpPupeeteer and Puppeteer
 
 ### Puppeteer's class must be instanciated
 
@@ -68,7 +68,9 @@ const puppeteer = require('puppeteer');
 You have to instanciate the `PhpPupeeteer` class:
 
 ```php
-$puppeteer = new \PhpPupeeteer\PhpPupeeteer;
+use PhpPupeeteer\PhpPupeeteer;
+
+$puppeteer = PhpPupeeteer;
 ```
 
 This will create a new Node process controlled by PHP.

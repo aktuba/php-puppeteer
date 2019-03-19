@@ -51,7 +51,7 @@ This package requires PHP >= 7.1 and Node >= 8.
 Install it with these two command lines:
 
 ```shell
-composer require aktuba/php-puphpeteer@dev-master
+composer require aktuba/php-puphpeteer
 npm install @nesk/puphpeteer
 ```
 

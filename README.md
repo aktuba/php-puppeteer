@@ -153,18 +153,3 @@ Instead, a `Node\Exception` will be thrown, the Node process will stay alive and
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
-
-## Logo attribution
-
-PuPHPeteer's logo is composed of:
-
-- [Puppet](https://thenounproject.com/search/?q=puppet&i=52120) by Luis Prado from [the Noun Project](http://thenounproject.com/).
-- [Elephant](https://thenounproject.com/search/?q=elephant&i=954119) by Lluisa Iborra from [the Noun Project](http://thenounproject.com/).
-
-Thanks to [Laravel News](https://laravel-news.com/) for picking the icons and colors of the logo.
-
-## Support me
-
-PuPHPeteer is a project requiring a lot of work (especially with [Rialto](https://github.com/nesk/rialto)). While I'm happy to work on it on my free time, I also enjoy to drink a couple of beers sometimes with my friends. If you want to support development, buy me a beer at [BeerPay](https://beerpay.io/nesk/puphpeteer). 🙏
-
-[![Beerpay](https://beerpay.io/nesk/puphpeteer/badge.svg)](https://beerpay.io/nesk/puphpeteer)

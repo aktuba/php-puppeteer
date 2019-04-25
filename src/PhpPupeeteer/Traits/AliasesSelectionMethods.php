@@ -2,7 +2,7 @@
 
 namespace PhpPupeeteer\Traits;
 
-use Nesk\Puphpeteer\Resources\ElementHandle;
+use PhpPupeeteer\Resources\ElementHandle;
 
 trait AliasesSelectionMethods
 {
@@ -11,6 +11,10 @@ trait AliasesSelectionMethods
 		return $this->__call('$', [$selector]);
 	}
 
+    /**
+     * @param string $selector
+     * @return ElementHandle[]
+     */
 	public function querySelectorAll(string $selector): array
 	{
 		return $this->__call('$$', [$selector]);

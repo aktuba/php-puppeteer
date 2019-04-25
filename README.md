@@ -11,7 +11,14 @@ Here are some examples [borrowed from Puppeteer's documentation](https://github.
 use PhpPupeeteer\PhpPupeeteer;
 
 $phpPuppeteer = new PhpPupeeteer;
-$browser = $phpPuppeteer->getBrowser();
+$browser = $phpPuppeteer->getBrowser([
+    'args' => [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+    ],
+]);
 $page = $browser->newPage();
 $page->gotoWithWait('https://example.com');
 $page->screenshot(['path' => 'example.png']);

@@ -186,6 +186,18 @@ class Page extends Buffer
 		return $this->waitForResponse($function, $options);
 	}
 
+    public function waitForRegexUrlResponse(string $regexUrl, array $options = []): Response
+    {
+        $function = Js::createWithParameters(['response'])
+            ->body("
+                let regex = {$regexUrl};
+                return response.url().match(regex);
+            ")
+        ;
+
+        return $this->waitForResponse($function, $options);
+    }
+
 	public function setGeolocation(float $latitude, float $longitude, int $accuracy = 0)
 	{
 		return parent::setGeolocation([

@@ -5,7 +5,8 @@ namespace PhpPupeeteer\Resources;
 use PhpPupeeteer\Data\Js;
 use PhpPupeeteer\Traits\{
 	AliasesSelectionMethods,
-	AliasesEvaluationMethods
+	AliasesEvaluationMethods,
+	Throttler
 };
 use Nesk\Rialto\Exceptions\Node;
 use PhpPupeeteer\Exception\InternalError;
@@ -25,7 +26,6 @@ use PhpPupeeteer\Exception\InternalError;
  * @method void bringToFront()
  * @method Browser browser()
  * @method BrowserContext browserContext()
- * @method void click(string $selector, array $options = [])
  * @method string content()
  * @method array cookies(...$urls)
  * @method Coverage coverage()
@@ -34,8 +34,6 @@ use PhpPupeeteer\Exception\InternalError;
  * @method void exposeFunction(string $name, Js $puppeteerFunction)
  * @method void focus(string $selector)
  * @method Frame[] frames()
- * @method Response|null goBack(array $options = [])
- * @method Response|null goForward(array $options = [])
  * @method void hover(string $selector)
  * @method bool isClosed()
  * @method Frame mainFrame()
@@ -57,7 +55,6 @@ use PhpPupeeteer\Exception\InternalError;
  * @method void setRequestInterception(bool $value)
  * @method void setUserAgent(string $userAgent)
  * @method void setViewport(array $options)
- * @method void tap(string $selector)
  * @method Target target()
  * @method string title()
  * @method void type(string $selector, string $text, array $options = [])
@@ -70,7 +67,6 @@ use PhpPupeeteer\Exception\InternalError;
  * @method JSHandle waitFor($selectorOrFunctionOrTimeout, array $options = [], ...$args)
  * @method Request waitForRequest($urlOrPredicate, array $options = [])
  * @method Response waitForResponse($urlOrPredicate, array $options = [])
- * @method ElementHandle waitForSelector(string $selector, array $options = [])
  * @method ElementHandle waitForXPath($xpath, array $options = [])
  * @method evaluate(Js $function)
  */
@@ -79,7 +75,8 @@ class Page extends Buffer
 
 	use
 		AliasesSelectionMethods,
-		AliasesEvaluationMethods
+		AliasesEvaluationMethods,
+		Throttler
 	;
 
 	protected $blockedRequests = [];
@@ -151,7 +148,7 @@ class Page extends Buffer
 	public function gotoWithWait(string $url, array $options = [])
 	{
 		return $this->goto($url, array_merge([$options, [
-			'waitUntil' => 'networkidle2',
+			'waitUntil' => 'networkidle0',
 		]]));
 	}
 
@@ -185,18 +182,6 @@ class Page extends Buffer
 		;
 		return $this->waitForResponse($function, $options);
 	}
-
-    public function waitForRegexUrlResponse(string $regexUrl, array $options = []): Response
-    {
-        $function = Js::createWithParameters(['response'])
-            ->body("
-                let regex = {$regexUrl};
-                return response.url().match(regex);
-            ")
-        ;
-
-        return $this->waitForResponse($function, $options);
-    }
 
 	public function setGeolocation(float $latitude, float $longitude, int $accuracy = 0)
 	{
@@ -269,9 +254,9 @@ class Page extends Buffer
 					->body("
 						const {$consts};
 						if ({$codes}){
-						    request.abort();
+							request.abort();
 						} else {
-						    request.continue();
+							request.continue();
 						}
 					")
 				;
@@ -308,6 +293,59 @@ class Page extends Buffer
 			$this->blockedRequests[$type] = array_keys($array);
 		}
 		return $this;
+	}
+
+	/**
+	 * @param string $selector
+	 * @param array $options
+	 * @return ElementHandle
+	 */
+	public function waitForSelector(string $selector, array $options = []): ElementHandle
+    {
+		$this->addAction()->waitForAPM();
+		return parent::waitForSelector($selector, $options);
+	}
+
+	/**
+	 * @param array $options
+	 * @return Response|null
+	 */
+	public function goBack(array $options = [])
+    {
+		$this->addAction()->waitForAPM();
+		return parent::goBack($options);
+	}
+
+	/**
+	 * @param array $options
+	 * @return Response|null
+	 */
+	public function goForward(array $options = [])
+    {
+		$this->addAction()->waitForAPM();
+		return parent::goForward($options);
+	}
+
+	/**
+	 * @param string $selector
+	 * @param array $options
+	 * @return void
+	 */
+	public function click(string $selector, array $options = []):void
+    {
+		$this->addAction()->waitForAPM();
+		parent::click($selector, $options);
+	}
+
+	/**
+	 * @param string $selector
+	 * @param array $options
+	 * @return void
+	 */
+	public function tap(string $selector, array $options = []):void
+    {
+		$this->addAction()->waitForAPM();
+		parent::tap($selector, $options);
 	}
 
 }

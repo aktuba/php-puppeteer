@@ -316,6 +316,16 @@ class Page extends Buffer
 		return parent::goBack($options);
 	}
 
+	public function goBackAfterTimeout(int $milliseconds = 300)
+    {
+        $this->addAction()->waitForAPM();
+        $this->evaluate(Js::createWithBody("
+	        setTimeout(function(){
+                history.back();
+            }, {$milliseconds});
+	    "));
+    }
+
 	/**
 	 * @param array $options
 	 * @return Response|null
@@ -336,6 +346,16 @@ class Page extends Buffer
 		$this->addAction()->waitForAPM();
 		parent::click($selector, $options);
 	}
+
+	public function clickAfterTimeout(string $selector, int $milliseconds = 300):void
+    {
+        $this->addAction()->waitForAPM();
+	    $this->evaluate(Js::createWithBody("
+	        setTimeout(function(){
+                document.querySelector('{$selector}').click();
+            }, {$milliseconds});
+	    "));
+    }
 
 	/**
 	 * @param string $selector

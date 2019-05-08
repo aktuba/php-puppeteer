@@ -17,6 +17,29 @@ $browser = $phpPuppeteer->getBrowser([
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
+        '--incognito',
+    ],
+]);
+$page = $browser->newPage();
+$page->gotoWithWait('https://example.com');
+$page->screenshot(['path' => 'example.png']);
+$browser->close();
+```
+
+**Example** - show browser window
+
+```php
+use PhpPupeeteer\PhpPupeeteer;
+
+$phpPuppeteer = new PhpPupeeteer;
+$browser = $phpPuppeteer->getBrowser([
+    'headless' => false,
+    'args' => [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--incognito',
+        '--start-maximized',
     ],
 ]);
 $page = $browser->newPage();
@@ -50,6 +73,8 @@ printf('Dimensions: %s', print_r($dimensions, true));
 
 $browser->close();
 ```
+
+
 
 ## Requirements and installation
 

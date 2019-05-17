@@ -5,8 +5,7 @@ namespace PhpPupeeteer\Resources;
 use PhpPupeeteer\Data\Js;
 use PhpPupeeteer\Traits\{
 	AliasesSelectionMethods,
-	AliasesEvaluationMethods,
-	Throttler
+	AliasesEvaluationMethods
 };
 use Nesk\Rialto\Exceptions\Node;
 use PhpPupeeteer\Exception\InternalError;
@@ -76,8 +75,7 @@ class Page extends Buffer
 
 	use
 		AliasesSelectionMethods,
-		AliasesEvaluationMethods,
-		Throttler
+		AliasesEvaluationMethods
 	;
 
 	protected $blockedRequests = [];

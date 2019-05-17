@@ -295,6 +295,17 @@ class Page extends Buffer
 		return $this;
 	}
 
+    /**
+     * @param string $selector
+     * @param array $options
+     * @return ElementHandle
+     */
+    public function waitForSelector(string $selector, array $options = []): ElementHandle
+    {
+        $this->addAction()->waitForAPM();
+        return parent::waitForSelector($selector, $options);
+    }
+
 	/**
 	 * @param array $options
 	 * @return Response|null

@@ -296,17 +296,6 @@ class Page extends Buffer
 	}
 
 	/**
-	 * @param string $selector
-	 * @param array $options
-	 * @return ElementHandle
-	 */
-	public function waitForSelector(string $selector, array $options = []): ElementHandle
-    {
-		$this->addAction()->waitForAPM();
-		return parent::waitForSelector($selector, $options);
-	}
-
-	/**
 	 * @param array $options
 	 * @return Response|null
 	 */
@@ -315,16 +304,6 @@ class Page extends Buffer
 		$this->addAction()->waitForAPM();
 		return parent::goBack($options);
 	}
-
-	public function goBackAfterTimeout(int $milliseconds = 300)
-    {
-        $this->addAction()->waitForAPM();
-        $this->evaluate(Js::createWithBody("
-	        setTimeout(function(){
-                history.back();
-            }, {$milliseconds});
-	    "));
-    }
 
 	/**
 	 * @param array $options
@@ -346,16 +325,6 @@ class Page extends Buffer
 		$this->addAction()->waitForAPM();
 		parent::click($selector, $options);
 	}
-
-	public function clickAfterTimeout(string $selector, int $milliseconds = 300):void
-    {
-        $this->addAction()->waitForAPM();
-	    $this->evaluate(Js::createWithBody("
-	        setTimeout(function(){
-                document.querySelector('{$selector}').click();
-            }, {$milliseconds});
-	    "));
-    }
 
 	/**
 	 * @param string $selector

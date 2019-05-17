@@ -129,7 +129,7 @@ class Page extends Buffer
 		return $this->addBlockingRule($type, $rules);
 	}
 
-	public function authenticate(string $username, string $password): JSHandle
+	public function authenticate(string $username, string $password)
 	{
 		return parent::authenticate([
 			'username' => $username,

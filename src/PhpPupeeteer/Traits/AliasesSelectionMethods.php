@@ -2,7 +2,7 @@
 
 namespace PhpPupeeteer\Traits;
 
-use Nesk\Puphpeteer\Resources\ElementHandle;
+use PhpPupeeteer\Resources\ElementHandle;
 
 trait AliasesSelectionMethods
 {

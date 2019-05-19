@@ -18,4 +18,20 @@ use Nesk\Rialto\Data\JsFunction;
  * @method Js async(bool $async = true)
  * @method array jsonSerialize()
  */
-class Js extends JsFunction {}
+class Js extends JsFunction {
+
+	/**
+	 * Proxy the "createWith*" static method calls to the "*" non-static method calls of a new instance.
+	 */
+	public static function __callStatic(string $name, array $arguments)
+	{
+		$name = lcfirst(substr($name, strlen('createWith')));
+
+		if ('jsonSerialize' === $name) {
+			throw new \BadMethodCallException;
+		}
+
+		return call_user_func([new static, $name], ...$arguments);
+	}
+
+}

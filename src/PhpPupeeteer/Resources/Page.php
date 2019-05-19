@@ -72,7 +72,7 @@ use PhpPupeeteer\Exception\InternalError;
  * @method Response waitForResponse($urlOrPredicate, array $options = [])
  * @method ElementHandle waitForSelector(string $selector, array $options = [])
  * @method ElementHandle waitForXPath($xpath, array $options = [])
- * @method Response waitForNavigation(array $options)
+ * @method Response waitForNavigation(array $options = [])
  * @method evaluate(Js $function)
  */
 class Page extends Buffer

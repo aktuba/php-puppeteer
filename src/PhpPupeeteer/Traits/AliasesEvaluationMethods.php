@@ -3,7 +3,7 @@
 namespace PhpPupeeteer\Traits;
 
 use PhpPupeeteer\Data\Js;
-use Nesk\Puphpeteer\Resources\JSHandle;
+use PhpPupeeteer\Resources\JSHandle;
 
 trait AliasesEvaluationMethods
 {

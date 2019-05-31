@@ -36,4 +36,9 @@ class ElementHandle extends JSHandle
 
     use AliasesSelectionMethods, AliasesEvaluationMethods;
 
+	public function getClasses(): array {
+		$classesString = trim((string) $this->getProperty('className')->jsonValue());
+		return array_keys(array_flip(explode(' ', $classesString)));
+	}
+
 }

@@ -72,6 +72,7 @@ use PhpPupeeteer\Exception\InternalError;
  * @method Response waitForResponse($urlOrPredicate, array $options = [])
  * @method ElementHandle waitForSelector(string $selector, array $options = [])
  * @method ElementHandle waitForXPath($xpath, array $options = [])
+ * @method Response waitForNavigation(array $options = [])
  * @method evaluate(Js $function)
  */
 class Page extends Buffer
@@ -132,7 +133,7 @@ class Page extends Buffer
 		return $this->addBlockingRule($type, $rules);
 	}
 
-	public function authenticate(string $username, string $password): JSHandle
+	public function authenticate(string $username, string $password)
 	{
 		return parent::authenticate([
 			'username' => $username,
@@ -151,7 +152,7 @@ class Page extends Buffer
 	public function gotoWithWait(string $url, array $options = [])
 	{
 		return $this->goto($url, array_merge([$options, [
-			'waitUntil' => 'networkidle2',
+			'waitUntil' => 'networkidle0',
 		]]));
 	}
 
@@ -257,9 +258,9 @@ class Page extends Buffer
 					->body("
 						const {$consts};
 						if ({$codes}){
-						    request.abort();
+							request.abort();
 						} else {
-						    request.continue();
+							request.continue();
 						}
 					")
 				;

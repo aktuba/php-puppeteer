@@ -11,7 +11,37 @@ Here are some examples [borrowed from Puppeteer's documentation](https://github.
 use PhpPupeeteer\PhpPupeeteer;
 
 $phpPuppeteer = new PhpPupeeteer;
-$browser = $phpPuppeteer->getBrowser();
+$browser = $phpPuppeteer->getBrowser([
+    'args' => [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--incognito',
+    ],
+]);
+$page = $browser->newPage();
+$page->gotoWithWait('https://example.com');
+$page->screenshot(['path' => 'example.png']);
+$browser->close();
+```
+
+**Example** - show browser window
+
+```php
+use PhpPupeeteer\PhpPupeeteer;
+
+$phpPuppeteer = new PhpPupeeteer;
+$browser = $phpPuppeteer->getBrowser([
+    'headless' => false,
+    'args' => [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--incognito',
+        '--start-maximized',
+    ],
+]);
 $page = $browser->newPage();
 $page->gotoWithWait('https://example.com');
 $page->screenshot(['path' => 'example.png']);
@@ -43,6 +73,8 @@ printf('Dimensions: %s', print_r($dimensions, true));
 
 $browser->close();
 ```
+
+
 
 ## Requirements and installation
 

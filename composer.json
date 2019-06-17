@@ -5,10 +5,11 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "nesk/puphpeteer": "dev-2.0.0",
+        "nesk/puphpeteer": "^2.0.0",
         "ext-mbstring": "*",
         "ext-json": "*"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "": "src/"

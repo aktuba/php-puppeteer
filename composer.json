@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "nesk/puphpeteer": "^1.5",
+        "nesk/puphpeteer": "dev-2.0.0",
         "ext-mbstring": "*",
         "ext-json": "*"
     },
